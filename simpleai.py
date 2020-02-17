@@ -1,4 +1,4 @@
-globalUserName = 0 # Initilise global variable 
+globalUserName = "defaultName" # Initilise global variable
 
 # Desc: Verify whether user input is greeting
 # Param: Input from user in String
@@ -10,8 +10,8 @@ def isUserInputGreeting(argument):
         "how are you?": True,
         "morning": True,
         "afternoon": True,
-        "noon": True,
         "evening": True,
+        "noon": True,
     }
     return switcher.get(argument.lower(), False)
 
@@ -34,16 +34,25 @@ def getUserName():
   global globalUserName   # accessing the global viariable
   globalUserName = input()
 
-# Desc: Response to user after asking for user name 
+# Desc: Response to user after asking for user name
 # Param: Type of response
 # Retval: None, result will be printed on console
 def response(responseType):
   if responseType.lower() == "greeting":
     print("Hi, nice to meet you! What's your name?")
+    return "Hi, nice to meet you! What's your name?"
+
   elif responseType.lower() == "replygreetingwithname":
     print("Hi " + globalUserName + ", how's your day?")
+    return "Hi " + globalUserName + ", how's your day?"
+
   elif responseType.lower() == "farewell":
     print("Alright, see you soon.")
+    return "Alright, see you soon."
+
+  else:
+    print("Invalid Response Type Detected!")
+    return "Invalid Response Type Detected!"
 
 # Desc: Main function to call relevant function to perform
 #       chatting
@@ -58,12 +67,9 @@ def chatBot(inputFromUser):
   elif isUserInputFarewell(inputFromUser) == True:
     response("farewell")
   else:
-    print("I dont understand what you just said.")  
+    print("I dont understand what you just said.")
 
-# Infinite Loop 
-while True:
+# Infinite Loop (remove because it cause unittest "hang, instantiating test")
+# while True:
   userInput = input()
   chatBot(userInput)
-
-# Reference
-# [1]. https://data-flair.training/blogs/python-switch-case/
